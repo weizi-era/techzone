@@ -43,7 +43,7 @@ export default function CartPage() {
           <FadeIn>
             <div className="flex items-center rounded-xl" style={{ background: 'oklch(0.2 0.04 25 / 0.3)', padding: 'var(--spacing-sm) var(--spacing-md)', marginBottom: 'var(--spacing-md)', gap: '0.5rem' }}>
               <Tag className="text-theme-gold" style={{ width: '1rem', height: '1rem' }} />
-              <span className="text-foreground" style={{ fontSize: 'var(--font-size-small)' }}>再买¥{shortfall.toFixed(0)}可享满1000减200优惠，<Link to="/" className="text-primary cursor-pointer">去凑单 <ArrowRight style={{ width: '0.75rem', height: '0.75rem', display: 'inline' }} /></ArrowRight></Link></span>
+              <span className="text-foreground" style={{ fontSize: 'var(--font-size-small)' }}>再买¥{shortfall.toFixed(0)}可享满1000减200优惠，<Link to="/" className="text-primary cursor-pointer">去凑单 <ArrowRight style={{ width: '0.75rem', height: '0.75rem', display: 'inline' }} /></Link></span>
             </div>
           </FadeIn>
         )}

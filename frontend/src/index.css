@@ -1,5 +1,5 @@
-@import "tailwindcss";
-@import "tw-animate-css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -82,7 +82,8 @@
   --radius: 0.75rem;
 
   /* === 字体排版 === */
-  --font-family: "Exo 2", "Inter Variable", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  --font-family:
+    'Exo 2', 'Inter Variable', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
   --font-size-display: 3.5rem;
   --font-size-headline: 2rem;
   --font-size-title: 1.5rem;
@@ -108,9 +109,9 @@
 
   /* === 阴影层级 === */
   --ds-shadow-sm: 0 1px 3px oklch(0.205 0.02 265 / 0.08);
-  --ds-shadow-md: 0 4px 12px oklch(0.205 0.02 265 / 0.10), 0 2px 4px oklch(0.205 0.02 265 / 0.06);
+  --ds-shadow-md: 0 4px 12px oklch(0.205 0.02 265 / 0.1), 0 2px 4px oklch(0.205 0.02 265 / 0.06);
   --ds-shadow-lg: 0 8px 24px oklch(0.205 0.02 265 / 0.12), 0 4px 8px oklch(0.205 0.02 265 / 0.08);
-  --ds-shadow-xl: 0 16px 48px oklch(0.205 0.02 265 / 0.16), 0 8px 16px oklch(0.205 0.02 265 / 0.10);
+  --ds-shadow-xl: 0 16px 48px oklch(0.205 0.02 265 / 0.16), 0 8px 16px oklch(0.205 0.02 265 / 0.1);
   --shadow-sm: var(--ds-shadow-sm);
   --shadow-md: var(--ds-shadow-md);
   --shadow-lg: var(--ds-shadow-lg);
@@ -266,11 +267,21 @@
 @utility container {
   margin-inline: auto;
   padding-inline: 1rem;
-  @media (width >= 640px) { max-width: 640px; }
-  @media (width >= 768px) { max-width: 768px; }
-  @media (width >= 1024px) { max-width: 1024px; }
-  @media (width >= 1280px) { max-width: 1280px; }
-  @media (width >= 1536px) { max-width: 1536px; }
+  @media (width >= 640px) {
+    max-width: 640px;
+  }
+  @media (width >= 768px) {
+    max-width: 768px;
+  }
+  @media (width >= 1024px) {
+    max-width: 1024px;
+  }
+  @media (width >= 1280px) {
+    max-width: 1280px;
+  }
+  @media (width >= 1536px) {
+    max-width: 1536px;
+  }
 }
 
 /* ================================================================
@@ -283,61 +294,65 @@
     filter var(--duration-normal, 200ms) var(--ease-default, ease);
 }
 
-.page-transition.fade-out { opacity: 0; }
-.page-transition.fade-in  { opacity: 1; }
+.page-transition.fade-out {
+  opacity: 0;
+}
+.page-transition.fade-in {
+  opacity: 1;
+}
 
-.page-transition[data-transition="slide-up"].fade-out {
+.page-transition[data-transition='slide-up'].fade-out {
   opacity: 0;
   transform: translateY(24px);
 }
-.page-transition[data-transition="slide-up"].fade-in {
+.page-transition[data-transition='slide-up'].fade-in {
   opacity: 1;
   transform: translateY(0);
 }
 
-.page-transition[data-transition="slide-fade"].fade-out {
+.page-transition[data-transition='slide-fade'].fade-out {
   opacity: 0;
   transform: translateX(-24px);
 }
-.page-transition[data-transition="slide-fade"].fade-in {
+.page-transition[data-transition='slide-fade'].fade-in {
   opacity: 1;
   transform: translateX(0);
 }
 
-.page-transition[data-transition="blur-fade"].fade-out {
+.page-transition[data-transition='blur-fade'].fade-out {
   opacity: 0;
   filter: blur(12px);
 }
-.page-transition[data-transition="blur-fade"].fade-in {
+.page-transition[data-transition='blur-fade'].fade-in {
   opacity: 1;
   filter: blur(0px);
 }
 
-.page-transition[data-transition="scale"].fade-out {
+.page-transition[data-transition='scale'].fade-out {
   opacity: 0;
   transform: scale(0.96);
 }
-.page-transition[data-transition="scale"].fade-in {
+.page-transition[data-transition='scale'].fade-in {
   opacity: 1;
   transform: scale(1);
 }
 
-.page-transition[data-transition="bounce"] {
+.page-transition[data-transition='bounce'] {
   transition:
     opacity var(--duration-normal, 200ms) var(--ease-default, ease),
     transform var(--duration-slow, 300ms) var(--ease-bounce, cubic-bezier(0.34, 1.56, 0.64, 1)),
     filter var(--duration-normal, 200ms) var(--ease-default, ease);
 }
-.page-transition[data-transition="bounce"].fade-out {
+.page-transition[data-transition='bounce'].fade-out {
   opacity: 0;
   transform: scale(0.92);
 }
-.page-transition[data-transition="bounce"].fade-in {
+.page-transition[data-transition='bounce'].fade-in {
   opacity: 1;
   transform: scale(1);
 }
 
-.page-transition[data-transition="none"] {
+.page-transition[data-transition='none'] {
   transition: none !important;
 }
 
@@ -349,9 +364,63 @@
 
 /* === TechZone custom utilities === */
 @utility glow-primary {
-  box-shadow: 0 0 20px oklch(0.55 0.22 265 / 0.3), 0 0 60px oklch(0.55 0.22 265 / 0.1);
+  box-shadow:
+    0 0 20px oklch(0.55 0.22 265 / 0.3),
+    0 0 60px oklch(0.55 0.22 265 / 0.1);
 }
 
 @utility glow-accent {
-  box-shadow: 0 0 20px oklch(0.6 0.2 265 / 0.3), 0 0 60px oklch(0.6 0.2 265 / 0.1);
+  box-shadow:
+    0 0 20px oklch(0.6 0.2 265 / 0.3),
+    0 0 60px oklch(0.6 0.2 265 / 0.1);
+}
+
+/* === 滚动条优化 === */
+/* Webkit 浏览器（Chrome, Safari, Edge） */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: oklch(0.35 0.05 270);
+  border-radius: 4px;
+  transition: background 200ms ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(0.45 0.08 265);
+  box-shadow: 0 0 12px oklch(0.55 0.22 265 / 0.3);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: oklch(0.55 0.22 265);
+}
+
+/* Firefox */
+* {
+  scrollbar-color: oklch(0.35 0.05 270) transparent;
+  scrollbar-width: thin;
+}
+
+*:hover {
+  scrollbar-color: oklch(0.45 0.08 265) transparent;
+}
+
+/* 深色模式下的滚动条 */
+.dark ::-webkit-scrollbar-thumb {
+  background: oklch(0.4 0.06 270);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: oklch(0.5 0.1 265);
+  box-shadow: 0 0 12px oklch(0.6 0.22 265 / 0.4);
+}
+
+.dark ::-webkit-scrollbar-thumb:active {
+  background: oklch(0.6 0.22 265);
 }

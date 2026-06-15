@@ -33,9 +33,11 @@ export function HeroBanner() {
           </div>
         </FadeIn>
       </div>
-      <div className="absolute right-4 bottom-1/2 translate-y-1/2 hidden md:flex flex-col" style={{ gap: 'var(--spacing-sm)' }}>
-        <Button variant="outline" size="icon" className="rounded-full cursor-pointer" style={{ background: 'oklch(0.18 0.025 270 / 0.6)', borderColor: 'var(--border)', color: 'var(--foreground)' }} onClick={prev}><ChevronLeft style={{ width: '1rem', height: '1rem' }} /></Button>
-        <Button variant="outline" size="icon" className="rounded-full cursor-pointer" style={{ background: 'oklch(0.18 0.025 270 / 0.6)', borderColor: 'var(--border)', color: 'var(--foreground)' }} onClick={next}><ChevronRight style={{ width: '1rem', height: '1rem' }} /></Button>
+      <div className="absolute right-4 bottom-1/2 translate-y-1/2 flex" style={{ gap: 'var(--spacing-sm)' }}>
+        <Button variant="outline" size="icon" className="rounded-full cursor-pointer transition-all hover:scale-110 hover:glow-primary" style={{ background: 'oklch(0.2 0.025 270 / 0.8)', backdropFilter: 'blur(10px)', borderColor: 'oklch(0.35 0.05 270)', color: 'var(--foreground)', padding: '0.75rem', width: '3.5rem', height: '3.5rem' }} onClick={next}><ChevronRight style={{ width: '1.5rem', height: '1.5rem' }} /></Button>
+      </div>
+      <div className="absolute left-4 bottom-1/2 translate-y-1/2 flex" style={{ gap: 'var(--spacing-sm)' }}>
+        <Button variant="outline" size="icon" className="rounded-full cursor-pointer transition-all hover:scale-110 hover:glow-primary" style={{ background: 'oklch(0.2 0.025 270 / 0.8)', backdropFilter: 'blur(10px)', borderColor: 'oklch(0.35 0.05 270)', color: 'var(--foreground)', padding: '0.75rem', width: '3.5rem', height: '3.5rem' }} onClick={prev}><ChevronLeft style={{ width: '1.5rem', height: '1.5rem' }} /></Button>
       </div>
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex" style={{ gap: 'var(--spacing-xs)' }}>
         {banners.map((_, i) => (<button key={i} onClick={() => setCurrent(i)} className="rounded-full transition-all cursor-pointer" style={{ width: i === current ? '2rem' : '0.5rem', height: '0.5rem', background: i === current ? 'var(--primary)' : 'oklch(0.5 0.02 270 / 0.5)', transition: 'all var(--duration-normal) var(--ease-default)' }} />))}
