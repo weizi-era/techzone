@@ -1,0 +1,225 @@
+import type { Product, Category, Banner } from '@/types/shop';
+
+export const banners: Banner[] = [
+  {
+    id: 1,
+    title: 'Galaxy S25 Ultra',
+    subtitle: '旗舰新品首发',
+    description: '钛金属机身 | 2亿像素 | Galaxy AI 全新体验',
+    cta: '立即抢购',
+    gradient: 'linear-gradient(135deg, oklch(0.2 0.04 270) 0%, oklch(0.35 0.15 265) 50%, oklch(0.55 0.22 265) 100%)',
+  },
+  {
+    id: 2,
+    title: '限时特惠',
+    subtitle: '数码狂欢节',
+    description: '精选数码产品低至5折 | 满1000减200 | 限量秒杀',
+    cta: '查看优惠',
+    gradient: 'linear-gradient(135deg, oklch(0.25 0.06 25) 0%, oklch(0.45 0.18 25) 50%, oklch(0.6 0.22 25) 100%)',
+  },
+  {
+    id: 3,
+    title: '会员专享',
+    subtitle: '尊享特权',
+    description: '新人立减50元 | 专属折扣 | 免费配送 | 延长保修',
+    cta: '开通会员',
+    gradient: 'linear-gradient(135deg, oklch(0.2 0.04 155) 0%, oklch(0.35 0.12 155) 50%, oklch(0.55 0.18 155) 100%)',
+  },
+];
+
+export const categories: Category[] = [
+  { id: 'phone', name: '手机', icon: 'Smartphone', count: 1286, subcategories: [
+    { id: 'phone-all', name: '全部手机' }, { id: 'phone-flagship', name: '旗舰手机' },
+    { id: 'phone-mid', name: '中端手机' }, { id: 'phone-gaming', name: '游戏手机' },
+  ]},
+  { id: 'computer', name: '电脑', icon: 'Laptop', count: 968, subcategories: [
+    { id: 'comp-laptop', name: '笔记本' }, { id: 'comp-desktop', name: '台式机' },
+    { id: 'comp-tablet', name: '平板电脑' }, { id: 'comp-mini', name: '迷你主机' },
+  ]},
+  { id: 'headphone', name: '耳机', icon: 'Headphones', count: 756, subcategories: [
+    { id: 'hp-wireless', name: '无线耳机' }, { id: 'hp-wired', name: '有线耳机' },
+    { id: 'hp-noise', name: '降噪耳机' }, { id: 'hp-gaming', name: '游戏耳机' },
+  ]},
+  { id: 'wearable', name: '智能穿戴', icon: 'Watch', count: 523, subcategories: [
+    { id: 'wear-watch', name: '智能手表' }, { id: 'wear-band', name: '手环' },
+    { id: 'wear-glasses', name: '智能眼镜' }, { id: 'wear-ring', name: '智能戒指' },
+  ]},
+  { id: 'camera', name: '摄影器材', icon: 'Camera', count: 412, subcategories: [
+    { id: 'cam-dslr', name: '单反相机' }, { id: 'cam-mirrorless', name: '微单相机' },
+    { id: 'cam-lens', name: '镜头' }, { id: 'cam-drone', name: '无人机' },
+  ]},
+  { id: 'gaming', name: '游戏外设', icon: 'Gamepad2', count: 634, subcategories: [
+    { id: 'game-mouse', name: '鼠标' }, { id: 'game-keyboard', name: '键盘' },
+    { id: 'game-controller', name: '手柄' }, { id: 'game-monitor', name: '显示器' },
+  ]},
+  { id: 'storage', name: '存储设备', icon: 'HardDrive', count: 389, subcategories: [
+    { id: 'stor-ssd', name: '固态硬盘' }, { id: 'stor-hdd', name: '机械硬盘' },
+    { id: 'stor-usb', name: 'U盘' }, { id: 'stor-card', name: '存储卡' },
+  ]},
+  { id: 'accessory', name: '配件周边', icon: 'Cable', count: 1245, subcategories: [
+    { id: 'acc-case', name: '手机壳' }, { id: 'acc-charger', name: '充电器' },
+    { id: 'acc-cable', name: '数据线' }, { id: 'acc-power', name: '移动电源' },
+  ]},
+];
+
+const productImages = [
+  'https://picsum.photos/seed/tech1/400/400',
+  'https://picsum.photos/seed/tech2/400/400',
+  'https://picsum.photos/seed/tech3/400/400',
+  'https://picsum.photos/seed/tech4/400/400',
+  'https://picsum.photos/seed/tech5/400/400',
+  'https://picsum.photos/seed/tech6/400/400',
+  'https://picsum.photos/seed/tech7/400/400',
+  'https://picsum.photos/seed/tech8/400/400',
+  'https://picsum.photos/seed/tech9/400/400',
+  'https://picsum.photos/seed/tech10/400/400',
+  'https://picsum.photos/seed/tech11/400/400',
+  'https://picsum.photos/seed/tech12/400/400',
+];
+
+export const products: Product[] = [
+  {
+    id: 'p1', name: 'Galaxy S25 Ultra', brand: 'Samsung', category: 'phone',
+    price: 9999, originalPrice: 10999, image: productImages[0],
+    images: [productImages[0], productImages[1], productImages[2], productImages[3]],
+    rating: 4.9, reviewCount: 12680, sales: 38920,
+    tags: ['旗舰', '新品', '5G'], stock: 256,
+    specs: { '屏幕': '6.9英寸 QHD+', '处理器': '骁龙8 Gen 4', '内存': '12GB', '存储': '512GB', '电池': '5000mAh', '摄像头': '2亿像素' },
+    description: 'Galaxy S25 Ultra 采用钛金属机身，搭载骁龙8 Gen 4处理器，2亿像素主摄，S Pen内置，Galaxy AI全新体验。是三星最强大的旗舰手机。',
+    isHot: true, isNew: true,
+  },
+  {
+    id: 'p2', name: 'MacBook Pro 16" M4 Max', brand: 'Apple', category: 'computer',
+    price: 27999, originalPrice: 29999, image: productImages[1],
+    images: [productImages[1], productImages[2], productImages[3], productImages[4]],
+    rating: 4.9, reviewCount: 8920, sales: 15680,
+    tags: ['旗舰', '专业', 'M4'], stock: 128,
+    specs: { '屏幕': '16.2英寸 Liquid Retina XDR', '芯片': 'Apple M4 Max', '内存': '48GB', '存储': '1TB SSD', '电池': '22小时', '接口': 'Thunderbolt 5 x3' },
+    description: '全新 MacBook Pro 搭载 M4 Max 芯片，Thunderbolt 5 接口，最长22小时续航，为专业创作者打造。',
+    isHot: true,
+  },
+  {
+    id: 'p3', name: 'AirPods Pro 3', brand: 'Apple', category: 'headphone',
+    price: 1899, originalPrice: 1999, image: productImages[2],
+    images: [productImages[2], productImages[3], productImages[4], productImages[5]],
+    rating: 4.8, reviewCount: 23560, sales: 89320,
+    tags: ['降噪', '新品', '空间音频'], stock: 512,
+    specs: { '芯片': 'H3', '降噪': '自适应主动降噪', '续航': '6+30小时', '防水': 'IPX5', '连接': '蓝牙5.4', '充电': 'MagSafe' },
+    description: 'AirPods Pro 3 搭载 H3 芯片，自适应主动降噪，个性化空间音频，6小时续航加充电盒可达30小时。',
+    isNew: true,
+  },
+  {
+    id: 'p4', name: 'Apple Watch Ultra 3', brand: 'Apple', category: 'wearable',
+    price: 6499, originalPrice: 6999, image: productImages[3],
+    images: [productImages[3], productImages[4], productImages[5], productImages[6]],
+    rating: 4.7, reviewCount: 6580, sales: 12450,
+    tags: ['运动', '钛合金', '双频GPS'], stock: 89,
+    specs: { '表壳': '49mm 钛合金', '芯片': 'S10 SIP', '续航': '36/72小时', '防水': '100米', 'GPS': '双频精密', '传感器': '血氧/心电/体温' },
+    description: 'Apple Watch Ultra 3 钛合金表壳，双频精密GPS，100米防水，最长72小时续航，为极限运动而生。',
+    isHot: true,
+  },
+  {
+    id: 'p5', name: 'Sony A7R V 微单', brand: 'Sony', category: 'camera',
+    price: 25999, originalPrice: 28999, image: productImages[4],
+    images: [productImages[4], productImages[5], productImages[6], productImages[7]],
+    rating: 4.8, reviewCount: 3420, sales: 5680,
+    tags: ['全画幅', '6100万像素'], stock: 45,
+    specs: { '传感器': '6100万像素全画幅CMOS', '对焦': 'AI自动对焦759点', '视频': '8K 24p', '防抖': '5轴5.5级', '连拍': '10fps', '屏幕': '4轴翻转触控屏' },
+    description: 'Sony A7R V 搭载6100万像素全画幅传感器，AI智能对焦，8K视频录制，专业影像旗舰。',
+  },
+  {
+    id: 'p6', name: 'Logitech G Pro X 2', brand: 'Logitech', category: 'gaming',
+    price: 899, originalPrice: 1099, image: productImages[5],
+    images: [productImages[5], productImages[6], productImages[7], productImages[8]],
+    rating: 4.6, reviewCount: 15680, sales: 32450,
+    tags: ['电竞', '无线', '轻量'], stock: 320,
+    specs: { '传感器': 'HERO 2 44K DPI', '连接': 'LIGHTSPEED 无线', '重量': '60g', '续航': '95小时', '按键': '8个可编程', '脚贴': 'PTFE' },
+    description: 'Logitech G Pro X 2 超轻量电竞鼠标，60克极轻机身，HERO 2传感器44000 DPI，95小时续航。',
+    isFlashSale: true, flashSaleEnd: new Date(Date.now() + 3600000 * 3).toISOString(),
+  },
+  {
+    id: 'p7', name: 'iPhone 16 Pro Max', brand: 'Apple', category: 'phone',
+    price: 11999, originalPrice: 12999, image: productImages[6],
+    images: [productImages[6], productImages[7], productImages[8], productImages[9]],
+    rating: 4.9, reviewCount: 45230, sales: 128900,
+    tags: ['旗舰', 'A18 Pro', '5G'], stock: 380,
+    specs: { '屏幕': '6.9英寸 Super Retina XDR', '芯片': 'A18 Pro', '内存': '8GB', '存储': '256GB起', '电池': '4685mAh', '摄像头': '4800万三摄' },
+    description: 'iPhone 16 Pro Max 搭载 A18 Pro 芯片，4800万像素三摄系统，6.9英寸超大屏幕，Apple Intelligence 全新体验。',
+    isHot: true,
+  },
+  {
+    id: 'p8', name: 'DJI Mini 4 Pro', brand: 'DJI', category: 'camera',
+    price: 5788, originalPrice: 6388, image: productImages[7],
+    images: [productImages[7], productImages[8], productImages[9], productImages[10]],
+    rating: 4.7, reviewCount: 8960, sales: 18340,
+    tags: ['无人机', '4K HDR', '249g'], stock: 76,
+    specs: { '重量': '249g', '相机': '1/1.3英寸 48MP', '视频': '4K/60fps HDR', '续航': '34分钟', '图传': 'O4 20km', '避障': '全向感知' },
+    description: 'DJI Mini 4 Pro 249克轻量机身，1/1.3英寸传感器4800万像素，4K/60fps HDR视频，全向避障。',
+  },
+  {
+    id: 'p9', name: 'ThinkPad X1 Carbon Gen12', brand: 'Lenovo', category: 'computer',
+    price: 12999, originalPrice: 14999, image: productImages[8],
+    images: [productImages[8], productImages[9], productImages[10], productImages[11]],
+    rating: 4.6, reviewCount: 6780, sales: 9870,
+    tags: ['商务', '轻薄', 'Intel'], stock: 156,
+    specs: { '屏幕': '14英寸 2.8K OLED', '处理器': 'Intel Ultra 7', '内存': '32GB', '存储': '1TB SSD', '重量': '1.09kg', '续航': '15小时' },
+    description: 'ThinkPad X1 Carbon 第12代，1.09kg极致轻薄，Intel Ultra 7处理器，2.8K OLED屏幕，商务旗舰之选。',
+    isFlashSale: true, flashSaleEnd: new Date(Date.now() + 3600000 * 5).toISOString(),
+  },
+  {
+    id: 'p10', name: 'Samsung T7 Shield 2TB', brand: 'Samsung', category: 'storage',
+    price: 1299, originalPrice: 1599, image: productImages[9],
+    images: [productImages[9], productImages[10], productImages[11], productImages[0]],
+    rating: 4.8, reviewCount: 19230, sales: 56780,
+    tags: ['便携', '加密', '高速'], stock: 890,
+    specs: { '容量': '2TB', '接口': 'USB 3.2 Gen2', '速度': '1050MB/s', '加密': 'AES 256位', '防护': 'IP65防尘防水', '重量': '98g' },
+    description: 'Samsung T7 Shield 2TB 便携固态硬盘，1050MB/s高速传输，IP65防护，AES 256位硬件加密。',
+  },
+  {
+    id: 'p11', name: 'HHKB Professional Hybrid', brand: 'PFU', category: 'gaming',
+    price: 2499, originalPrice: 2799, image: productImages[10],
+    images: [productImages[10], productImages[11], productImages[0], productImages[1]],
+    rating: 4.5, reviewCount: 4560, sales: 7890,
+    tags: ['静电容', '编程', '极简'], stock: 67,
+    specs: { '轴体': 'Topre 静电容', '配列': '60%', '连接': '蓝牙/USB-C', '键帽': 'PBT', '续航': '约3个月', '系统': 'Win/Mac切换' },
+    description: 'HHKB Professional Hybrid 静电容键盘，Topre轴体，60%极简配列，程序员之选。',
+  },
+  {
+    id: 'p12', name: 'MagSafe 充电器套装', brand: 'Apple', category: 'accessory',
+    price: 399, originalPrice: 499, image: productImages[11],
+    images: [productImages[11], productImages[0], productImages[1], productImages[2]],
+    rating: 4.4, reviewCount: 32100, sales: 98760,
+    tags: ['MagSafe', '快充', '便携'], stock: 1560,
+    specs: { '功率': '15W MagSafe', '兼容': 'iPhone 12+', '线长': '1.5m', '认证': 'MFi', '材质': '铝合金+硅胶', '重量': '56g' },
+    description: 'Apple MagSafe 充电器套装，15W无线快充，MFi认证，铝合金底座+1.5米编织线缆。',
+    isFlashSale: true, flashSaleEnd: new Date(Date.now() + 3600000 * 2).toISOString(),
+  },
+];
+
+export const brands = [
+  { id: 'apple', name: 'Apple', logo: 'Apple' },
+  { id: 'samsung', name: 'Samsung', logo: 'Samsung' },
+  { id: 'sony', name: 'Sony', logo: 'Sony' },
+  { id: 'huawei', name: 'Huawei', logo: 'Huawei' },
+  { id: 'lenovo', name: 'Lenovo', logo: 'Lenovo' },
+  { id: 'dji', name: 'DJI', logo: 'DJI' },
+  { id: 'logitech', name: 'Logitech', logo: 'Logitech' },
+  { id: 'xiaomi', name: 'Xiaomi', logo: 'Xiaomi' },
+  { id: 'bose', name: 'Bose', logo: 'Bose' },
+  { id: 'dell', name: 'Dell', logo: 'Dell' },
+];
+
+export const hotSearches = ['iPhone 16', 'Galaxy S25', 'AirPods Pro 3', 'MacBook Pro M4', '机械键盘', '降噪耳机', '智能手表', '无人机', '固态硬盘', '游戏鼠标'];
+
+export const searchSuggestions: Record<string, string[]> = {
+  'i': ['iPhone 16 Pro Max', 'iPad Pro M4', 'AirPods Pro 3'],
+  'ip': ['iPhone 16 Pro Max', 'iPad Pro M4', 'iPhone 16 手机壳'],
+  's': ['Samsung S25 Ultra', 'Sony A7R V', 'SSD 固态硬盘'],
+  'sa': ['Samsung S25 Ultra', 'Samsung T7 Shield', 'Samsung 手表'],
+  'm': ['MacBook Pro M4', 'MagSafe 充电器', '机械键盘'],
+  'ma': ['MacBook Pro M4', 'MacBook Air M3', 'MagSafe 充电器'],
+  'h': ['HHKB 键盘', '华为 Mate 70', '耳机 降噪'],
+  'he': ['耳机 降噪', '耳机 无线', '耳机 游戏'],
+  'd': ['DJI Mini 4 Pro', 'Dell 显示器', '电竞鼠标'],
+  'g': ['Galaxy S25 Ultra', 'Gamepad 手柄', '显卡 RTX 5090'],
+};

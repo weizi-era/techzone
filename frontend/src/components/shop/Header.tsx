@@ -1,143 +1,112 @@
-import { useState, useEffect } from 'react';
-import { Search, ShoppingCart, User, Menu, X, Zap } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Search, ShoppingCart, User, Zap, X, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-
-const navLinks = [
-  { label: '首页', href: '#' },
-  { label: '手机', href: '#categories' },
-  { label: '电脑', href: '#hot-products' },
-  { label: '耳机', href: '#promotion' },
-  { label: '智能穿戴', href: '#' },
-  { label: '游戏外设', href: '#' },
-];
+import { useCart } from '@/store/ShopContext';
+import { hotSearches, searchSuggestions } from '@/data/products';
 
 export function Header() {
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [searchFocused, setSearchFocused] = useState(false);
+  const [query, setQuery] = useState('');
+  const [showSuggest, setShowSuggest] = useState(false);
+  const [history, setHistory] = useState<string[]>(() => { try { return JSON.parse(localStorage.getItem('searchHistory') || '[]'); } catch { return []; } });
+  const { totalCount } = useCart();
+  const navigate = useNavigate();
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  const suggestions = query.length > 0
+    ? Object.entries(searchSuggestions).find(([k]) => query.toLowerCase().startsWith(k))?.[1] || []
+    : [];
+
+  const doSearch = (q: string) => {
+    const trimmed = q.trim();
+    if (!trimmed) return;
+    const newHistory = [trimmed, ...history.filter(h => h !== trimmed)].slice(0, 10);
+    setHistory(newHistory);
+    localStorage.setItem('searchHistory', JSON.stringify(newHistory));
+    setShowSuggest(false);
+    navigate(`/search?q=${encodeURIComponent(trimmed)}`);
+  };
+
+  const clearHistory = () => { setHistory([]); localStorage.removeItem('searchHistory'); };
 
   return (
-    <header
-      className="fixed top-0 left-0 right-0 z-50 transition-all"
-      style={{
-        transition: 'var(--duration-normal) var(--ease-default)',
-        background: scrolled ? 'oklch(0.13 0.02 270 / 0.95)' : 'transparent',
-        backdropFilter: scrolled ? 'blur(12px)' : 'none',
-        borderBottom: scrolled ? '1px solid var(--border)' : '1px solid transparent',
-      }}
-    >
-      <div className="container flex items-center justify-between" style={{ height: '4rem' }}>
+    <header className="sticky top-0 z-50" style={{ background: 'oklch(0.13 0.02 270 / 0.95)', backdropFilter: 'blur(12px)', borderBottom: '1px solid var(--border)' }}>
+      <div className="container flex items-center" style={{ height: '3.5rem', gap: 'var(--spacing-lg)' }}>
         {/* Logo */}
-        <a href="#" className="flex items-center" style={{ gap: 'var(--spacing-sm)' }}>
-          <div
-            className="flex items-center justify-center rounded-lg bg-primary"
-            style={{ width: '2rem', height: '2rem' }}
-          >
-            <Zap className="text-primary-foreground" style={{ width: '1.1rem', height: '1.1rem' }} />
+        <Link to="/" className="flex items-center flex-shrink-0 cursor-pointer" style={{ gap: '0.5rem' }}>
+          <div className="flex items-center justify-center rounded-lg bg-primary" style={{ width: '1.75rem', height: '1.75rem' }}>
+            <Zap className="text-primary-foreground" style={{ width: '1rem', height: '1rem' }} />
           </div>
-          <span
-            className="font-bold text-primary"
-            style={{ fontSize: 'var(--font-size-title)', letterSpacing: 'var(--letter-spacing-tight)' }}
-          >
-            TechZone
-          </span>
-        </a>
+          <span className="font-bold text-foreground hidden sm:inline" style={{ fontSize: 'var(--font-size-title)' }}>TechZone</span>
+        </Link>
 
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center" style={{ gap: 'var(--spacing-lg)' }}>
-          {navLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
-              style={{
-                fontSize: 'var(--font-size-label)',
-                transition: 'color var(--duration-fast) var(--ease-default)',
-              }}
-            >
-              {link.label}
-            </a>
-          ))}
-        </nav>
-
-        {/* Search + Actions */}
-        <div className="flex items-center" style={{ gap: 'var(--spacing-md)' }}>
-          {/* Search */}
-          <div
-            className="hidden sm:flex items-center rounded-lg border transition-all"
-            style={{
-              borderColor: searchFocused ? 'var(--primary)' : 'var(--border)',
-              background: 'var(--input)',
-              paddingLeft: 'var(--spacing-sm)',
-              paddingRight: 'var(--spacing-sm)',
-              gap: 'var(--spacing-xs)',
-              transition: 'border-color var(--duration-fast) var(--ease-default)',
-              width: searchFocused ? '280px' : '200px',
-            }}
-          >
-            <Search className="text-muted-foreground" style={{ width: '1rem', height: '1rem', flexShrink: 0 }} />
+        {/* Search */}
+        <div className="flex-1 relative max-w-2xl">
+          <div className="flex items-center rounded-full" style={{ background: 'var(--secondary)', border: '1px solid var(--border)' }}>
+            <Search className="text-muted-foreground flex-shrink-0" style={{ width: '1rem', height: '1rem', marginLeft: '0.75rem' }} />
             <input
-              type="text"
-              placeholder="搜索数码产品..."
-              className="bg-transparent outline-none text-foreground placeholder:text-muted-foreground"
-              style={{ fontSize: 'var(--font-size-label)', width: '100%', padding: '0.4rem 0' }}
-              onFocus={() => setSearchFocused(true)}
-              onBlur={() => setSearchFocused(false)}
+              ref={inputRef}
+              value={query}
+              onChange={e => { setQuery(e.target.value); setShowSuggest(true); }}
+              onFocus={() => setShowSuggest(true)}
+              onKeyDown={e => e.key === 'Enter' && doSearch(query)}
+              placeholder="搜索数码好物..."
+              className="flex-1 bg-transparent text-foreground placeholder:text-muted-foreground outline-none"
+              style={{ padding: '0.5rem 0.75rem', fontSize: 'var(--font-size-label)' }}
             />
+            {query && <button onClick={() => { setQuery(''); inputRef.current?.focus(); }} className="cursor-pointer mr-2"><X className="text-muted-foreground" style={{ width: '0.875rem', height: '0.875rem' }} /></button>}
+            <Button className="rounded-full cursor-pointer" style={{ background: 'var(--primary)', color: 'var(--primary-foreground)', padding: '0.4rem 1.2rem', fontSize: 'var(--font-size-small)', borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }} onClick={() => doSearch(query)}>搜索</Button>
           </div>
 
-          {/* Cart */}
-          <Button variant="ghost" size="icon" className="relative cursor-pointer">
+          {/* Suggestions Dropdown */}
+          {showSuggest && (
+            <div className="absolute top-full left-0 right-0 mt-1 rounded-xl shadow-xl z-50" style={{ background: 'var(--card)', border: '1px solid var(--border)', padding: 'var(--spacing-md)' }}>
+              {suggestions.length > 0 && (
+                <div style={{ marginBottom: 'var(--spacing-md)' }}>
+                  <p className="text-muted-foreground font-medium" style={{ fontSize: 'var(--font-size-small)', marginBottom: '0.375rem' }}>搜索建议</p>
+                  {suggestions.map(s => (
+                    <button key={s} onClick={() => { setQuery(s); doSearch(s); }} className="block w-full text-left text-foreground hover:text-primary cursor-pointer rounded" style={{ padding: '0.375rem 0.5rem', fontSize: 'var(--font-size-label)', transition: 'color var(--duration-fast) var(--ease-default)' }}>{s}</button>
+                  ))}
+                </div>
+              )}
+              {history.length > 0 && (
+                <div style={{ marginBottom: 'var(--spacing-md)' }}>
+                  <div className="flex items-center justify-between" style={{ marginBottom: '0.375rem' }}>
+                    <p className="text-muted-foreground font-medium" style={{ fontSize: 'var(--font-size-small)' }}>搜索历史</p>
+                    <button onClick={clearHistory} className="text-muted-foreground hover:text-foreground cursor-pointer" style={{ fontSize: 'var(--font-size-small)' }}>清除</button>
+                  </div>
+                  <div className="flex flex-wrap" style={{ gap: '0.375rem' }}>
+                    {history.map(h => (
+                      <button key={h} onClick={() => { setQuery(h); doSearch(h); }} className="rounded-full text-muted-foreground hover:text-foreground cursor-pointer" style={{ background: 'var(--secondary)', padding: '0.25rem 0.75rem', fontSize: 'var(--font-size-small)', transition: 'color var(--duration-fast) var(--ease-default)' }}>{h}</button>
+                    ))}
+                  </div>
+                </div>
+              )}
+              <div>
+                <div className="flex items-center" style={{ gap: '0.375rem', marginBottom: '0.375rem' }}>
+                  <Clock className="text-theme-red" style={{ width: '0.75rem', height: '0.75rem' }} />
+                  <p className="text-muted-foreground font-medium" style={{ fontSize: 'var(--font-size-small)' }}>热搜榜</p>
+                </div>
+                {hotSearches.map((h, i) => (
+                  <button key={h} onClick={() => { setQuery(h); doSearch(h); }} className="flex items-center w-full text-left cursor-pointer rounded" style={{ padding: '0.375rem 0.5rem', fontSize: 'var(--font-size-label)' }}>
+                    <span className={`font-bold flex-shrink-0 ${i < 3 ? 'text-theme-red' : 'text-muted-foreground'}`} style={{ width: '1.25rem', fontSize: 'var(--font-size-small)' }}>{i + 1}</span>
+                    <span className="text-foreground hover:text-primary" style={{ transition: 'color var(--duration-fast) var(--ease-default)' }}>{h}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Actions */}
+        <div className="flex items-center" style={{ gap: 'var(--spacing-md)' }}>
+          <Link to="/cart" className="relative cursor-pointer">
             <ShoppingCart className="text-foreground" style={{ width: '1.25rem', height: '1.25rem' }} />
-            <span
-              className="absolute flex items-center justify-center rounded-full bg-destructive text-white font-bold"
-              style={{ top: '2px', right: '2px', width: '1rem', height: '1rem', fontSize: '0.625rem' }}
-            >
-              3
-            </span>
-          </Button>
-
-          {/* User */}
-          <Button variant="ghost" size="icon" className="cursor-pointer">
-            <User className="text-foreground" style={{ width: '1.25rem', height: '1.25rem' }} />
-          </Button>
-
-          {/* Mobile menu */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden cursor-pointer"
-            onClick={() => setMobileOpen(!mobileOpen)}
-          >
-            {mobileOpen ? <X style={{ width: '1.25rem', height: '1.25rem' }} /> : <Menu style={{ width: '1.25rem', height: '1.25rem' }} />}
-          </Button>
+            {totalCount > 0 && <span className="absolute -top-1.5 -right-1.5 rounded-full text-primary-foreground font-bold" style={{ background: 'var(--destructive)', fontSize: '0.625rem', minWidth: '1rem', height: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{totalCount > 99 ? '99+' : totalCount}</span>}
+          </Link>
+          <Link to="/user" className="cursor-pointer"><User className="text-foreground" style={{ width: '1.25rem', height: '1.25rem' }} /></Link>
         </div>
       </div>
-
-      {/* Mobile Nav */}
-      {mobileOpen && (
-        <div className="md:hidden border-t" style={{ background: 'var(--card)', borderColor: 'var(--border)' }}>
-          <nav className="container flex flex-col" style={{ paddingBlock: 'var(--spacing-md)', gap: 'var(--spacing-sm)' }}>
-            {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="text-muted-foreground hover:text-foreground cursor-pointer"
-                style={{ fontSize: 'var(--font-size-label)', paddingBlock: 'var(--spacing-xs)' }}
-                onClick={() => setMobileOpen(false)}
-              >
-                {link.label}
-              </a>
-            ))}
-          </nav>
-        </div>
-      )}
     </header>
   );
 }
